@@ -55,7 +55,7 @@ function Cadastro() {
 
   return (
     <div>
-      <h1>Cadastro</h1>
+      <h1>Cadastro de Produto</h1>
 
       <form onSubmit={handleSubmit}>
         <input
