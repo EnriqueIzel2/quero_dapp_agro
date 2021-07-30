@@ -1,4 +1,4 @@
-export const contractAdress = '0xe11Db7c40219851aF496B05965299031a55F8B58';
+export const contractAdress = '0x192cd6Df995ef24FF6c12607912Acb94Ca9F1844';
 
 export const contractABI = [
   {
@@ -40,7 +40,6 @@ export const contractABI = [
     type: 'event',
   },
   {
-    constant: true,
     inputs: [
       {
         internalType: 'address',
@@ -61,12 +60,10 @@ export const contractABI = [
         type: 'uint256',
       },
     ],
-    payable: false,
     stateMutability: 'view',
     type: 'function',
   },
   {
-    constant: true,
     inputs: [],
     name: 'getAllProducts',
     outputs: [
@@ -108,12 +105,10 @@ export const contractABI = [
         type: 'tuple[]',
       },
     ],
-    payable: false,
     stateMutability: 'view',
     type: 'function',
   },
   {
-    constant: true,
     inputs: [
       {
         internalType: 'uint256',
@@ -154,12 +149,10 @@ export const contractABI = [
         type: 'string',
       },
     ],
-    payable: false,
     stateMutability: 'view',
     type: 'function',
   },
   {
-    constant: false,
     inputs: [
       {
         internalType: 'string',
@@ -169,12 +162,10 @@ export const contractABI = [
     ],
     name: 'setAccountUser',
     outputs: [],
-    payable: false,
     stateMutability: 'nonpayable',
     type: 'function',
   },
   {
-    constant: false,
     inputs: [
       {
         internalType: 'string',
@@ -199,7 +190,6 @@ export const contractABI = [
     ],
     name: 'setProduct',
     outputs: [],
-    payable: false,
     stateMutability: 'nonpayable',
     type: 'function',
   },
