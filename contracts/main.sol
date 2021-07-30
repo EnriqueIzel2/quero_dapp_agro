@@ -84,14 +84,4 @@ contract SmartContract {
     function getAllProducts() public view returns (Product[] memory) {
         return (productList);
     }
-
-    event Transfer(address _from, address _to, uint256 _amount);
-
-    function sendCoin(address _receiver, uint256 _amount)
-        public
-        returns (bool sufficient)
-    {
-        emit Transfer(msg.sender, _receiver, _amount);
-        return true;
-    }
 }
