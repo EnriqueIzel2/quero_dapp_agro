@@ -1,21 +1,17 @@
 import React from 'react';
-
-import { Card, Button } from 'react-bootstrap';
+import { Card, Button, CardContent, Typography } from '@material-ui/core';
 
 // eslint-disable-next-line react/prop-types
-function CardProduct({ description, name, price, owner, typeItem, payment }) {
+function CardProduct({ name, price, id, typeItem, payment }) {
   return (
-    <Card style={{ width: '18rem', backgroundColor: 'purple', margin: '10px' }}>
-      <Card.Body>
-        <Card.Title>{name}</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">{price}</Card.Subtitle>
-        <Card.Text>{description}</Card.Text>
-        <Card.Text>{typeItem}</Card.Text>
+    <Card>
+      <CardContent>
+        <Typography>{name}</Typography>
+        <Typography>{price}</Typography>
+        <Typography>{typeItem}</Typography>
 
-        <Button variant="primary" onClick={() => payment(owner, price)}>
-          Compar
-        </Button>
-      </Card.Body>
+        <Button onClick={() => payment(id, price)}>Comprar</Button>
+      </CardContent>
     </Card>
   );
 }

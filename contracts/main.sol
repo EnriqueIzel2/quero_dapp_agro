@@ -3,11 +3,6 @@ pragma solidity >=0.4.22;
 pragma experimental ABIEncoderV2;
 
 contract SmartContract {
-    struct AccountUser {
-        string name;
-        uint256 qtdSales;
-    }
-
     struct Product {
         address owner;
         address farmer;
@@ -18,25 +13,8 @@ contract SmartContract {
     }
 
     Product[] productList;
-    mapping(address => AccountUser) userList;
 
-    event RegisteredUser(address sender, bool confirmed);
     event RegisteredProduct(address sender, bool confirmed);
-
-    // USER
-    function setAccountUser(string memory _name) public {
-        userList[msg.sender] = AccountUser({name: _name, qtdSales: 0});
-        emit RegisteredUser(msg.sender, true);
-    }
-
-    function getAccountUser(address _addressUser)
-        public
-        view
-        returns (string memory, uint256)
-    {
-        AccountUser memory account = userList[_addressUser];
-        return (account.name, account.qtdSales);
-    }
 
     // PRODUCTS
     function setProduct(

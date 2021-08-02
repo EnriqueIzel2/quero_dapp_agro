@@ -1,6 +1,11 @@
-export const contractAdress = '0x192cd6Df995ef24FF6c12607912Acb94Ca9F1844';
+export const contractAdress = '0x5937357DEa6285CDBff5D5dc981520C2E02B2dd7';
 
 export const contractABI = [
+  {
+    inputs: [],
+    stateMutability: 'payable',
+    type: 'constructor',
+  },
   {
     anonymous: false,
     inputs: [
@@ -22,38 +27,27 @@ export const contractABI = [
   },
   {
     anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: 'address',
-        name: 'sender',
-        type: 'address',
-      },
-      {
-        indexed: false,
-        internalType: 'bool',
-        name: 'confirmed',
-        type: 'bool',
-      },
-    ],
-    name: 'RegisteredUser',
+    inputs: [],
+    name: 'alert',
     type: 'event',
   },
   {
     inputs: [
       {
-        internalType: 'address',
-        name: '_addressUser',
-        type: 'address',
+        internalType: 'uint256',
+        name: 'orderId',
+        type: 'uint256',
       },
     ],
-    name: 'getAccountUser',
+    name: 'delivery',
+    outputs: [],
+    stateMutability: 'nonpayable',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'depositedAmount',
     outputs: [
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
       {
         internalType: 'uint256',
         name: '',
@@ -64,8 +58,90 @@ export const contractABI = [
     type: 'function',
   },
   {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: 'orderId',
+        type: 'uint256',
+      },
+    ],
+    name: 'getOrder',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'productId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'buyer',
+            type: 'address',
+          },
+          {
+            internalType: 'bool',
+            name: 'delivered',
+            type: 'bool',
+          },
+        ],
+        internalType: 'struct SmartContract.Order',
+        name: 'order',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
     inputs: [],
-    name: 'getAllProducts',
+    name: 'getOrders',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'uint256',
+            name: 'id',
+            type: 'uint256',
+          },
+          {
+            internalType: 'uint256',
+            name: 'productId',
+            type: 'uint256',
+          },
+          {
+            internalType: 'address',
+            name: 'buyer',
+            type: 'address',
+          },
+          {
+            internalType: 'bool',
+            name: 'delivered',
+            type: 'bool',
+          },
+        ],
+        internalType: 'struct SmartContract.Order[]',
+        name: '',
+        type: 'tuple[]',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [
+      {
+        internalType: 'uint256',
+        name: '_index',
+        type: 'uint256',
+      },
+    ],
+    name: 'getProduct',
     outputs: [
       {
         components: [
@@ -85,9 +161,9 @@ export const contractABI = [
             type: 'string',
           },
           {
-            internalType: 'string',
+            internalType: 'uint256',
             name: 'price',
-            type: 'string',
+            type: 'uint256',
           },
           {
             internalType: 'string',
@@ -96,8 +172,93 @@ export const contractABI = [
           },
           {
             internalType: 'string',
-            name: 'description',
+            name: 'plantingLocation',
             type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'plantingDate',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'plantingMethod',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'harvestDate',
+            type: 'string',
+          },
+          {
+            internalType: 'enum SmartContract.Status',
+            name: 'status',
+            type: 'uint8',
+          },
+        ],
+        internalType: 'struct SmartContract.Product',
+        name: 'product',
+        type: 'tuple',
+      },
+    ],
+    stateMutability: 'view',
+    type: 'function',
+  },
+  {
+    inputs: [],
+    name: 'getProducts',
+    outputs: [
+      {
+        components: [
+          {
+            internalType: 'address',
+            name: 'owner',
+            type: 'address',
+          },
+          {
+            internalType: 'address',
+            name: 'farmer',
+            type: 'address',
+          },
+          {
+            internalType: 'string',
+            name: 'name',
+            type: 'string',
+          },
+          {
+            internalType: 'uint256',
+            name: 'price',
+            type: 'uint256',
+          },
+          {
+            internalType: 'string',
+            name: 'typeItem',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'plantingLocation',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'plantingDate',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'plantingMethod',
+            type: 'string',
+          },
+          {
+            internalType: 'string',
+            name: 'harvestDate',
+            type: 'string',
+          },
+          {
+            internalType: 'enum SmartContract.Status',
+            name: 'status',
+            type: 'uint8',
           },
         ],
         internalType: 'struct SmartContract.Product[]',
@@ -112,55 +273,34 @@ export const contractABI = [
     inputs: [
       {
         internalType: 'uint256',
-        name: '_index',
+        name: 'productId',
         type: 'uint256',
       },
     ],
-    name: 'getProduct',
-    outputs: [
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-      {
-        internalType: 'address',
-        name: '',
-        type: 'address',
-      },
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-      {
-        internalType: 'string',
-        name: '',
-        type: 'string',
-      },
-    ],
-    stateMutability: 'view',
+    name: 'payProduct',
+    outputs: [],
+    stateMutability: 'payable',
     type: 'function',
   },
   {
     inputs: [
       {
-        internalType: 'string',
-        name: '_name',
-        type: 'string',
+        internalType: 'uint256',
+        name: 'productId',
+        type: 'uint256',
+      },
+      {
+        internalType: 'address',
+        name: 'buyer',
+        type: 'address',
+      },
+      {
+        internalType: 'bool',
+        name: 'delivered',
+        type: 'bool',
       },
     ],
-    name: 'setAccountUser',
+    name: 'setOrder',
     outputs: [],
     stateMutability: 'nonpayable',
     type: 'function',
@@ -173,9 +313,9 @@ export const contractABI = [
         type: 'string',
       },
       {
-        internalType: 'string',
+        internalType: 'uint256',
         name: '_price',
-        type: 'string',
+        type: 'uint256',
       },
       {
         internalType: 'string',
@@ -184,7 +324,22 @@ export const contractABI = [
       },
       {
         internalType: 'string',
-        name: '_description',
+        name: '_plantingLocation',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '_plantingDate',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '_plantingMethod',
+        type: 'string',
+      },
+      {
+        internalType: 'string',
+        name: '_harvestDate',
         type: 'string',
       },
     ],

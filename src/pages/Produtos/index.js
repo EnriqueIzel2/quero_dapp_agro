@@ -1,74 +1,58 @@
-import React, { useEffect, useState } from 'react';
-import { Container } from 'react-bootstrap';
-import Web3 from 'web3';
+import React, { useContext, useState, useEffect } from 'react';
 
-import { contractAdress, contractABI } from '../../services/config';
-
-import { CardContainer } from './styles';
-
+import { Container, CardContainer } from './styles';
 import CardProduct from '../../components/CardProduct';
+import Header from '../../components/Header';
+import { DataContext } from '../../contexts/loadData';
 
 function Produtos() {
-  const [contrato, setContrato] = useState('');
-  const [accounts, setAccounts] = useState([]);
   const [products, setProducts] = useState([]);
 
+  const { accounts, contract } = useContext(DataContext);
+
   useEffect(() => {
-    const loadBlockchainData = async () => {
-      const web3 = new Web3(Web3.givenProvider || 'http://127.0.0.1:7545');
-      setContrato(web3);
-
+    async function loadProducts() {
       try {
-        const newAccounts = await web3.eth.requestAccounts();
-        setAccounts(newAccounts);
+        const newProducts = await contract.methods.getProducts().call();
+        setProducts(newProducts);
       } catch (error) {
-        // eslint-disable-next-line no-console
-        console.log(error);
+        console.log('O erro de produtos', error);
       }
-      const contract = new web3.eth.Contract(contractABI, contractAdress);
+    }
 
-      const newProducts = await contract.methods.getAllProducts().call();
-      // eslint-disable-next-line no-console
-      console.log(newProducts);
-      setProducts(newProducts);
-    };
-
-    loadBlockchainData();
+    loadProducts();
   }, []);
 
-  async function payment(_to, _value) {
-    const dataTransaction = { from: accounts[0], to: _to, value: _value };
-
-    await contrato.eth.sendTransaction(dataTransaction, (error, hash) => {
-      if (error) {
-        // eslint-disable-next-line no-console
-        console.log(error, hash);
-      }
-    });
+  async function payment(productId, _value) {
+    try {
+      await contract.methods
+        .payProduct(productId)
+        .send({ from: accounts[0], value: _value });
+    } catch (error) {
+      console.log('Erro no pagamento', error);
+    }
   }
 
-  function handlePayment(_to, _value) {
-    const number = parseInt(_value, 10);
+  function handlePayment(_productId, _value) {
+    const valueWei = _value;
+    //   .toBN(web3.utils.toWei(_value, 'ether'))
+    //   .toString();
 
-    const value = number * 1000000000000000000;
-
-    // eslint-disable-next-line no-console
-    console.log(_value);
-    payment(_to, value);
+    payment(_productId, valueWei);
   }
 
   return (
     <Container>
-      <h1>Quero agricultura</h1>
+      <Header title="Produtos" />
 
       <CardContainer>
-        {products.map(product => (
+        {products.map((product, index) => (
           <CardProduct
             name={product.name}
             price={product.price}
-            owner={product.owner}
+            id={index}
             typeItem={product.typeItem}
-            description={product.description}
+            status={product.status}
             payment={handlePayment}
           />
         ))}
